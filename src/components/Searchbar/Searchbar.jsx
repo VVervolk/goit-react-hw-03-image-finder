@@ -1,11 +1,13 @@
-import { SearchForm, Header, Button, Label, Input } from './Searchbar.styled';
+import { SearchForm, Header, Button, Input } from './Searchbar.styled';
+import { FaSearch } from 'react-icons/fa';
+import PropTypes from 'prop-types';
 
 export const Searchbar = props => {
   return (
     <Header>
       <SearchForm onSubmit={props.onSubmit}>
         <Button type="submit">
-          <Label>Search</Label>
+          <FaSearch className="icon" />
         </Button>
 
         <Input
@@ -18,4 +20,8 @@ export const Searchbar = props => {
       </SearchForm>
     </Header>
   );
+};
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
 };

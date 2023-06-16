@@ -5,8 +5,11 @@ import { getImages } from 'services/getImages';
 import { List } from './ImageGallery.styled';
 import { Oval } from 'react-loader-spinner';
 import ModalImage from 'components/Modal/Modal';
+import PropTypes from 'prop-types';
 
 export class ImageGallery extends Component {
+  static propTypes = { request: PropTypes.string.isRequired };
+
   state = {
     images: [],
     page: 1,
@@ -27,7 +30,7 @@ export class ImageGallery extends Component {
           })
           .then(data => {
             if (data.hits.length === 0) {
-              throw new Error('Search not found');
+              alert('Request not found');
             }
             this.setState({
               images: data.hits,
@@ -63,6 +66,14 @@ export class ImageGallery extends Component {
           console.error(error);
         });
     });
+  };
+
+  closeModal = e => {
+    if (e.currentTarget === e.target || e.code === 'Escape') {
+      this.setState({
+        showModal: false,
+      });
+    }
   };
 
   render() {
@@ -108,7 +119,7 @@ export class ImageGallery extends Component {
           <ButtonLoadMore onClick={this.loadMore}></ButtonLoadMore>
         )}
         {this.state.showModal && (
-          <ModalImage>
+          <ModalImage closeModal={this.closeModal}>
             <img src={this.state.checkedImage} alt="large" />
           </ModalImage>
         )}

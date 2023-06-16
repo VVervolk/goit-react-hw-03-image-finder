@@ -20,6 +20,7 @@ export class App extends Component {
     this.setState({
       value: userRequest,
     });
+    e.target.reset();
   };
 
   render() {
