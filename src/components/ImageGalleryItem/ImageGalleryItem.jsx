@@ -1,7 +1,9 @@
-export const ImageGalleryItem = () => {
+import { Image, Item } from './ImageGalleryItem.styled';
+
+export const ImageGalleryItem = ({ src, alt, largeImage, onClick }) => {
   return (
-    <li class="gallery-item">
-      <img src="" alt="" />
-    </li>
+    <Item onClick={onClick}>
+      <Image src={src} alt={alt} data-modalimage={largeImage} />
+    </Item>
   );
 };

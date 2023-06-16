@@ -1,19 +1,21 @@
+import { SearchForm, Header, Button, Label, Input } from './Searchbar.styled';
+
 export const Searchbar = props => {
   return (
-    <header className="searchbar">
-      <form className="form" onSubmit={props.onSubmit}>
-        <button type="submit" className="button">
-          <span className="but  ton-label">Search</span>
-        </button>
+    <Header>
+      <SearchForm onSubmit={props.onSubmit}>
+        <Button type="submit">
+          <Label>Search</Label>
+        </Button>
 
-        <input
+        <Input
           className="input"
           type="text"
           autoComplete="off"
           autoFocus
           placeholder="Search images and photos"
         />
-      </form>
-    </header>
+      </SearchForm>
+    </Header>
   );
 };
