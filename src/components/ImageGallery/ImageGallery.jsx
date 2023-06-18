@@ -16,6 +16,7 @@ export class ImageGallery extends Component {
     isLoading: false,
     checkedImage: null,
     showModal: false,
+    maxPage: null,
   };
 
   componentDidUpdate(prevProps) {
@@ -35,6 +36,7 @@ export class ImageGallery extends Component {
             this.setState({
               images: data.hits,
               isLoading: false,
+              maxPage: Math.ceil(data.totalHits / 12),
             });
           })
           .catch(error => {
@@ -78,6 +80,8 @@ export class ImageGallery extends Component {
 
   render() {
     const { images, isLoading } = this.state;
+    const shouldRenderButton =
+      images.length !== 0 && this.state.page < this.state.maxPage;
     return (
       <>
         {isLoading && (
@@ -115,7 +119,7 @@ export class ImageGallery extends Component {
             ></ImageGalleryItem>
           ))}
         </List>
-        {images.length !== 0 && (
+        {shouldRenderButton && (
           <ButtonLoadMore onClick={this.loadMore}></ButtonLoadMore>
         )}
         {this.state.showModal && (
